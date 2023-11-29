@@ -1,5 +1,4 @@
-<h1>Task List</h1>
-<% @tasks.each do |task| %>
-  <h4><%= task.title %></h4>
-  </p><%= task.description %></p>
+<h1 style="margin-left: 7px">Task List</h1>
+<% @tasks.each.with_index do |task, i| %>
+  <h4>&nbsp&nbsp<%= "#{i + 1}. " %>&nbsp<%= link_to task.title, tasks_path + "/#{task.id}" %></h4>
 <% end %>

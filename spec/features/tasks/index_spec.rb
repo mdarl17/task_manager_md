@@ -28,6 +28,17 @@ RSpec.describe  do
       click_link "Yardwork" 
 
       expect(current_path).to eq("/tasks/#{task1.id}")
+    end 
+
+    it "has a link for users to add new tasks" do 
+      visit "/tasks" 
+
+      expect(page).to have_link("Add task")
+
+      click_link "Add task" 
+
+      expect(current_path).to eq("/tasks/new")
+      expect(page).to have_content("Add a New Task")
     end
   end
   

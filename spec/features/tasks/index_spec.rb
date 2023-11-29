@@ -9,11 +9,25 @@ RSpec.describe  do
       visit "/tasks" 
 
       expect(page).to have_content("Task List")
-      expect(page).to have_content("Mow lawn, pick up dog droppings")
+      expect(page).to have_content("Yardwork")
       expect(page).to have_content("Grocery Shopping")
-      expect(page).to have_content("Go to Costco and King Soopers")
       expect(page).to have_content("Laundry")
-      expect(page).to have_content("Fold clothes on dryer")
+    end
+
+    it "when a user clicks on a task name, they are taken to a page that shows the task along with a short description of the task" do 
+      task1 = Task.create!(title: "Yardwork", description: "Mow lawn, pick up dog droppings")
+      task2 = Task.create!(title: "Grocery Shopping", description: "Go to Costco and King Soopers")
+      task3 = Task.create!(title: "Laundry", description: "Fold clothes on dryer")
+
+      visit "/tasks"
+
+      expect(page).to have_link("Yardwork")
+      expect(page).to have_link("Grocery Shopping")
+      expect(page).to have_link("Laundry")
+
+      click_link "Yardwork" 
+
+      expect(current_path).to eq("/tasks/#{task1.id}")
     end
   end
   
